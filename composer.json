@@ -31,7 +31,7 @@
     },    
     "autoload": {
         "psr-4": {
-            "Tobento\\Service\\Container\\": "src",
+            "Tobento\\Service\\Container\\": "src"
         }
     },
     "autoload-dev": {
