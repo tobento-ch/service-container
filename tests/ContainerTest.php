@@ -184,5 +184,35 @@ class ContainerTest extends TestCase
             $foo,
             $resolved->getName()
         );
+    }
+
+    public function testDefineNameUsesAutowiring()
+    {
+        $c = new Container();
+        
+        $c->set('withParameter', WithParameter::class);
+        
+        $resolved = $c->get('withParameter');
+                
+        $this->assertInstanceof(
+            Foo::class,
+            $resolved->getName()
+        );
+    }
+    
+    public function testDefineNameUsesSetParameter()
+    {
+        $c = new Container();
+        
+        $foo = new Foo();
+        
+        $c->set('withParameter', WithParameter::class)->construct($foo);
+        
+        $resolved = $c->get('withParameter');
+                
+        $this->assertSame(
+            $foo,
+            $resolved->getName()
+        );
     }    
 }
