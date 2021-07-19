@@ -184,12 +184,12 @@ class Container implements ContainerInterface, MakeInterface, CallInterface
     protected function resolve(string $id, null|array $parameters = null): mixed
     {
         // prevent circular dependency error.
-		if (isset($this->resolving[$id]))
+        if (isset($this->resolving[$id]))
         {
             throw new ContainerException(
                 sprintf('Entry (%s) cannot be resolved: circular dependency detected', $id)
             );
-		}
+        }
         
         $this->resolving[$id] = true;
         
