@@ -153,7 +153,7 @@ $foo = $container->get(Foo::class);
 
 **Prototype Definition:**
 
-You might declare the defintion as prototype, meaning returning always new instance.
+You might declare the defintion as prototype, meaning returning always a new instance.
 
 ```php
 use Tobento\Service\Container\Container;
