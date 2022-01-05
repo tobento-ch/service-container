@@ -25,12 +25,14 @@ class Definition implements DefinitionInterface
      * @param mixed Any value.
      * @param array<int|string, mixed> $parameters The parameters.
      * @param array<int, array<int|string, mixed>> $methods The methods to be called.
+     * @param bool $prototype
      */
     public function __construct(
         protected string $id,
         protected mixed $value = null,
         protected array $parameters = [],
-        protected array $methods = []
+        protected array $methods = [],
+        protected bool $prototype = false,
     ) {}
 
     /**
@@ -71,6 +73,16 @@ class Definition implements DefinitionInterface
     public function getMethods(): array
     {
         return $this->methods;
+    }
+    
+    /**
+     * Returns true if to create new instance, otherwise false.
+     *
+     * @return bool
+     */
+    public function isPrototype(): bool
+    {
+        return $this->prototype;
     }    
 
     /**
@@ -112,4 +124,17 @@ class Definition implements DefinitionInterface
         
         return $this;
     }
+    
+    /**
+     * Set if it a prototype, meaning returning always new instance.
+     *
+     * @param bool $prototype
+     * @return static $this
+     */
+    public function prototype(bool $prototype = true): static
+    {
+        $this->prototype = $prototype;
+        
+        return $this;
+    }    
 }

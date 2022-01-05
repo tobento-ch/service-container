@@ -108,7 +108,14 @@ class Container implements ContainerInterface, MakeInterface, CallInterface
      * @return mixed The value obtained from the identifier.
      */
     public function get(string $id): mixed
-    {
+    {        
+        if (
+            isset($this->definitions[$id])
+            && $this->definitions[$id]->isPrototype()
+        ) {
+            return $this->resolve($id);
+        }
+        
         return $this->resolved[$id] ??= $this->resolve($id);
     }
     

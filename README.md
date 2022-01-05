@@ -58,7 +58,7 @@ On union types parameter, the first resolvable parameter gets used if not set by
 
 ## Definitions
 
-By providing the resolved object:
+**By providing the resolved object:**
 
 ```php
 use Tobento\Service\Container\Container;
@@ -77,7 +77,7 @@ $container->set(Foo::class, new Foo('value'));
 $foo = $container->get(Foo::class);
 ```
 
-By defining the missing parameters:
+**By defining the missing parameters:**
 
 ```php
 use Tobento\Service\Container\Container;
@@ -103,7 +103,7 @@ $container->set(Foo::class)->with([0 => 'value']);
 $foo = $container->get(Foo::class);
 ```
 
-By using a closure:
+**By using a closure:**
 
 ```php
 use Tobento\Service\Container\Container;
@@ -124,13 +124,13 @@ $container->set(Foo::class, function($container) {
 $foo = $container->get(Foo::class);
 ```
 
-You might configure which implementation to use:
+**You might configure which implementation to use:**
 
 ```php
 $container->set(BarInterface::class, Bar::class);
 ```
 
-Defining method calls: You will need only to define build-in parameters as others get autowired if you want to.
+**Defining method calls:** You will need only to define build-in parameters as others get autowired if you want to.
 
 ```php
 use Tobento\Service\Container\Container;
@@ -149,6 +149,31 @@ $container->set(Foo::class)->callMethod('index', ['name' => 'value']);
 $container->set(Foo::class)->callMethod('index', [1 => 'value']);
 
 $foo = $container->get(Foo::class);
+```
+
+**Prototype Definition:**
+
+You might declare the defintion as prototype, meaning returning always new instance.
+
+```php
+use Tobento\Service\Container\Container;
+
+class Foo {}
+class Bar {}
+
+$container = new Container();
+
+$container->set(Foo::class)->prototype();
+
+$container->set(Bar::class, function() {
+    return new Bar();
+})->prototype();
+
+var_dump($container->get(Foo::class) === $container->get(Foo::class));
+// bool(false)
+
+var_dump($container->get(Bar::class) === $container->get(Bar::class));
+// bool(false)
 ```
 
 ## Make

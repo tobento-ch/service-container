@@ -47,6 +47,13 @@ interface DefinitionInterface
     public function getMethods(): array;
     
     /**
+     * Returns true if to create new instance, otherwise false.
+     *
+     * @return bool
+     */
+    public function isPrototype(): bool;    
+    
+    /**
      * Set the parameters.
      *
      * @param array<int|string, mixed> $parameters The parameters.
@@ -69,5 +76,13 @@ interface DefinitionInterface
      * @param array<int|string, mixed> $parameters The parameters.
      * @return static $this
      */
-    public function callMethod(string $method, array $parameters = []): static;    
+    public function callMethod(string $method, array $parameters = []): static;
+    
+    /**
+     * Set if it a prototype, meaning returning always new instance.
+     *
+     * @param bool $prototype
+     * @return static $this
+     */
+    public function prototype(bool $prototype = true): static;    
 }
