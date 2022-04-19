@@ -162,7 +162,7 @@ class Container implements ContainerInterface, MakeInterface, CallInterface
         try {
             return $this->autowire()->call($callable, $parameters);
         } catch (AutowireException $e) {
-            throw new ContainerException($e->getMessage());
+            throw new ContainerException($e->getMessage(), 0, $e);
         }
     }    
 
@@ -211,9 +211,7 @@ class Container implements ContainerInterface, MakeInterface, CallInterface
         } catch (NotFoundException $t) {
             throw $t;
         } catch (Throwable $t) {
-            throw new ContainerException(
-                $t->getMessage(),
-            );
+            throw new ContainerException($t->getMessage(), 0, $t);
         }
 
         unset($this->resolving[$id]);
