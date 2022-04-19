@@ -54,7 +54,7 @@ class Resolver implements ResolverInterface
         try {
             return $this->autowire->resolve($id, $parameters);
         } catch (Throwable $t) {
-            throw new ResolverException($t->getMessage());
+            throw new ResolverException($t->getMessage(), 0, $t);
         }
     }
     
