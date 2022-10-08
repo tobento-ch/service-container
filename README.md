@@ -241,8 +241,6 @@ interface ResolverInterface
      * @param string $id Identifier of the entry.
      * @param array<int|string, mixed> $parameters
      *
-     * @throws ResolverException
-     *
      * @return mixed
      */
     public function resolve(string $id, array $parameters = []): mixed;
