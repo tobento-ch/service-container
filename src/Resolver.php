@@ -45,17 +45,11 @@ class Resolver implements ResolverInterface
      * @param string $id Identifier of the entry.
      * @param array<int|string, mixed> $parameters
      *
-     * @throws ResolverException
-     *
      * @return mixed
      */
     public function resolve(string $id, array $parameters = []): mixed
-    {        
-        try {
-            return $this->autowire->resolve($id, $parameters);
-        } catch (Throwable $t) {
-            throw new ResolverException($t->getMessage(), 0, $t);
-        }
+    {
+        return $this->autowire->resolve($id, $parameters);
     }
     
     /**
