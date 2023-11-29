@@ -99,6 +99,17 @@ class ContainerTest extends TestCase
         $this->assertSame('value', $c->get('closure'));
     }
     
+    public function testResolvesSetClosureUsingAutowiring()
+    {
+        $c = new Container();
+        
+        $c->set('closure', function (Foo $foo) {
+            return $foo;
+        });
+        
+        $this->assertInstanceOf(Foo::class, $c->get('closure'));
+    }
+    
     public function testResolvesSetClassName()
     {
         $c = new Container();
