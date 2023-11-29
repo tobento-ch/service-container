@@ -26,7 +26,7 @@ class Resolver implements ResolverInterface
     /**
      * @var Autowire
      */    
-    private Autowire $autowire;
+    protected Autowire $autowire;
     
     /**
      * Create a new Resolver.
@@ -79,7 +79,7 @@ class Resolver implements ResolverInterface
         // Handle closure definition.
         if ($value instanceof Closure)
         {
-            $value = $value($this->container);
+            $value = $this->autowire->call($value);
         }
         
         // Handle method calls.
