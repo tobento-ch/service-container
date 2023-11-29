@@ -105,6 +105,8 @@ $foo = $container->get(Foo::class);
 
 **By using a closure:**
 
+The container will automatically resolve any closure arguments.
+
 ```php
 use Tobento\Service\Container\Container;
 
@@ -115,10 +117,18 @@ class Foo
     ) {} 
 }
 
+class Bar
+{
+    public function value(): string
+    {
+        return 'value';
+    } 
+}
+
 $container = new Container();
 
-$container->set(Foo::class, function($container) {
-    return new Foo('value');
+$container->set(Foo::class, static function(Bar $bar) {
+    return new Foo($bar->value());
 });
 
 $foo = $container->get(Foo::class);
